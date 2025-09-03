@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VitalEdge</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="icon.png" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <!-- Splash -->
+  <div id="splash">
+    <img src="icon.png" class="splash-logo" />
+    <h1 class="splash-title">VitalEdge</h1>
+  </div>
+
+  <header class="app-header">VitalEdge</header>
+
+  <main>
+    <!-- Home -->
+    <section id="home" class="tab active">
+      <div class="card fade">
+        <h2>Tasks</h2>
+        <ul id="taskList"></ul>
+        <div class="input-row">
+          <input type="text" id="taskInput" placeholder="Add new task..." />
+          <button onclick="addTask()">+</button>
+        </div>
+      </div>
+      <div class="card fade">
+        <h2>Calories</h2>
+        <canvas id="calorieChart" width="200" height="200"></canvas>
+        <p id="calorieText"></p>
+      </div>
+      <div class="card fade">
+        <h2>Protein</h2>
+        <canvas id="proteinChart" width="200" height="200"></canvas>
+        <p id="proteinText"></p>
+      </div>
+    </section>
+
+    <!-- Tasks -->
+    <section id="tasks" class="tab fade">
+      <h2>All Tasks</h2>
+      <ul id="taskListFull"></ul>
+    </section>
+
+    <!-- Calories -->
+    <section id="calories" class="tab fade">
+      <h2>Log Meals</h2>
+      <div class="input-row">
+        <input type="number" id="mealCalories" placeholder="Calories" />
+        <input type="number" id="mealProtein" placeholder="Protein (g)" />
+        <button onclick="addMeal()">Add</button>
+      </div>
+      <ul id="mealList"></ul>
+    </section>
+
+    <!-- Settings -->
+    <section id="settings" class="tab fade">
+      <h2>Settings</h2>
+      <label>Daily Calorie Goal:
+        <input type="number" id="calorieGoal" value="2500" />
+      </label>
+      <label>Daily Protein Goal:
+        <input type="number" id="proteinGoal" value="150" />
+      </label>
+      <button class="save-btn" onclick="saveSettings()">Save</button>
+    </section>
+
+    <!-- Scanner -->
+    <section id="scanner" class="tab fade">
+      <h2>AI Food Scanner</h2>
+      <p class="muted">Take or upload a meal photo. Get rough calories & protein.</p>
+
+      <input type="file" id="foodImage" accept="image/*" capture="environment" />
+      <img id="preview" class="preview hidden" />
+
+      <div class="row">
+        <label>Portion (grams)</label>
+        <input type="number" id="portion" placeholder="e.g. 250" />
+      </div>
+
+      <button id="scanBtn">Analyze Photo</button>
+      <div id="scanProgress" class="progress hidden">
+        <span>Analyzing photo</span>
+        <div class="loading-dots"><span></span><span></span><span></span></div>
+      </div>
+
+      <div id="scanResults" class="card hidden">
+        <h3>Results</h3>
+        <div id="labels"></div>
+        <div id="confidenceBar"><div id="confidenceFill"></div></div>
+        <p id="estimate"></p>
+        <button id="addToCalories" class="primary">Add to Calories</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom Nav -->
+  <nav class="navbar">
+    <button data-tab="tasks"><span class="material-icons">checklist</span><span>Tasks</span></button>
+    <button data-tab="home" class="active"><span class="material-icons">home</span><span>Home</span></button>
+    <button data-tab="calories"><span class="material-icons">local_fire_department</span><span>Calories</span></button>
+    <button data-tab="scanner"><span class="material-icons">camera</span><span>Scanner</span></button>
+    <button data-tab="settings"><span class="material-icons">settings</span><span>Settings</span></button>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>
